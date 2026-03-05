@@ -1,37 +1,49 @@
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{
-    "content": "@everyone",
-    "embeds": [
-      {
-        "title": "🎬 Noche de Películas",
-        "description": "Prepárense para una noche relajada viendo una película juntos en el servidor.",
-        "color": 5814783,
-        "fields": [
-          {
-            "name": "🗓 Fecha",
-            "value": "Sábado 12 de Abril",
-            "inline": true
-          },
-          {
-            "name": "⏰ Hora",
-            "value": "9:00 PM",
-            "inline": true
-          },
-          {
-            "name": "📍 Lugar",
-            "value": "Canal de Voz: Cine del Servidor",
-            "inline": true
-          },
-          {
-            "name": "🍿 Actividad",
-            "value": "Veremos una película juntos y comentaremos en chat o voz durante el evento."
-          }
-        ],
-        "footer": {
-          "text": "Trae snacks y disfruta con la comunidad ✨"
-        }
-      }
-    ]
-  }' \
-  ${{ secrets.DISCORD_WEBHOOK }}
+name: Anunciar evento en Discord
+
+on:
+  workflow_dispatch:
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar anuncio del evento
+        run: |
+          curl -X POST \
+          -H "Content-Type: application/json" \
+          -d '{
+            "content": "@everyone",
+            "embeds": [
+              {
+                "title": "🎬 Noche de Películas",
+                "description": "Prepárense para una noche relajada viendo una película juntos en el servidor.",
+                "color": 5814783,
+                "fields": [
+                  {
+                    "name": "🗓 Fecha",
+                    "value": "Sábado 12 de Abril",
+                    "inline": true
+                  },
+                  {
+                    "name": "⏰ Hora",
+                    "value": "9:00 PM",
+                    "inline": true
+                  },
+                  {
+                    "name": "📍 Lugar",
+                    "value": "Canal de Voz: Cine del Servidor",
+                    "inline": true
+                  },
+                  {
+                    "name": "🍿 Actividad",
+                    "value": "Veremos una película juntos y comentaremos en chat o voz durante el evento."
+                  }
+                ],
+                "footer": {
+                  "text": "Trae snacks y disfruta con la comunidad ✨"
+                }
+              }
+            ]
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
