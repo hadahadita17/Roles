@@ -1,18 +1,27 @@
-- name: Anunciar evento en Discord
-  run: |
-    curl -X POST \
-      -H "Content-Type: application/json" \
-      -d '{
-        "embeds": [
-          {
-            "title": "📢 Evento Social",
-            "description": "Empieza la noche de películas",
-            "color": 5814783,
-            " footer": {
-              "text": "Servidor XYZ"
-            }
-          }
-        ]
-      }' \
-      ${{ secrets.DISCORD_WEBHOOK }}
-    
+name: Enviar mensaje a Discord
+
+on:
+  workflow_dispatch:
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar embed a Discord
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{
+              "embeds": [
+                {
+                  "title": "📢 Evento Social",
+                  "description": "Empieza la noche de películas",
+                  "color": 5814783,
+                  "footer": {
+                    "text": "Servidor XYZ"
+                  }
+                }
+              ]
+            }' \
+            ${{ secrets.DISCORD_WEBHOOK }}
